@@ -1,0 +1,14 @@
+{
+  "name": "LiveScan OCR",
+  "short_name": "LiveScan",
+  "description": "Real-time camera OCR scanner",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080b10",
+  "theme_color": "#080b10",
+  "orientation": "any",
+  "icons": [
+    { "src": "logo.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

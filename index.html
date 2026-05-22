@@ -3,25 +3,62 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#080b10" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="LiveScan" />
+  <link rel="apple-touch-icon" href="logo.png" />
+  <link rel="manifest" href="manifest.json" />
   <title>LiveScan — Real-time OCR</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+  <div id="splashScreen">
+    <div id="splashInner">
+      <img src="logo.png" id="splashLogo" alt="LiveScan" />
+      <div id="splashName">LiveScan</div>
+      <div id="splashSub" class="mono">Real-time OCR Scanner</div>
+    </div>
+  </div>
 
   <div id="app">
 
     <header id="topBar">
       <div id="brand">
-        <span id="brandIcon">◈</span>
+        <img src="logo.png" id="brandLogo" alt="" />
         <span id="brandName">LiveScan</span>
       </div>
       <div id="controls">
-        <button id="toggleOverlay" class="iconBtn" title="Toggle word boxes">⬡</button>
-        <button id="toggleScan" class="iconBtn active" title="Start/stop scanning">◉</button>
-        <button id="toggleSidebar" class="iconBtn" title="Open notes">≡</button>
+
+        <button id="toggleOverlay" class="iconBtn active" title="Toggle word boxes">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+            <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+            <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+            <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+          </svg>
+        </button>
+
+        <button id="toggleScan" class="iconBtn active" title="Start/stop scanning">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/>
+            <circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/>
+          </svg>
+        </button>
+
+        <button id="toggleSidebar" class="iconBtn" title="Open notes">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14,2 14,8 20,8"/>
+            <line x1="8" y1="13" x2="16" y2="13"/>
+            <line x1="8" y1="17" x2="13" y2="17"/>
+          </svg>
+        </button>
+
       </div>
     </header>
 
@@ -37,10 +74,21 @@
 
       <div id="permissionScreen">
         <div id="permissionCard">
-          <div id="permIcon">◈</div>
+          <div id="permIconWrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+              <circle cx="12" cy="13" r="4"/>
+            </svg>
+          </div>
           <h2>Camera Access Required</h2>
           <p>LiveScan needs your camera to detect and extract text in real time.</p>
-          <button id="grantBtn">Allow Camera</button>
+          <button id="grantBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+              <circle cx="12" cy="13" r="4"/>
+            </svg>
+            Allow Camera
+          </button>
           <p id="permError" class="hidden"></p>
         </div>
       </div>
@@ -55,11 +103,40 @@
 
     <aside id="sidebar">
       <div id="sidebarHeader">
-        <span id="sidebarTitle">Notes</span>
+        <div id="sidebarTitleWrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14,2 14,8 20,8"/>
+            <line x1="8" y1="13" x2="16" y2="13"/>
+            <line x1="8" y1="17" x2="13" y2="17"/>
+          </svg>
+          <span id="sidebarTitle">Notes</span>
+        </div>
         <div id="sidebarActions">
-          <button id="copyAll" class="textBtn" title="Copy all notes">Copy All</button>
-          <button id="clearAll" class="textBtn danger" title="Delete all">Clear</button>
-          <button id="closeSidebar" class="iconBtn">✕</button>
+
+          <button id="copyAll" class="iconBtn" title="Copy all notes">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+          </button>
+
+          <button id="clearAll" class="iconBtn" title="Clear all notes">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="3,6 5,6 21,6"/>
+              <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+              <path d="M10 11v6M14 11v6"/>
+              <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+            </svg>
+          </button>
+
+          <button id="closeSidebar" class="iconBtn" title="Close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+
         </div>
       </div>
       <div id="noteList"></div>
@@ -67,6 +144,8 @@
     </aside>
 
     <div id="sidebarBackdrop"></div>
+
+    <div id="toast"></div>
 
   </div>
 
