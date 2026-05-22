@@ -1,5 +1,5 @@
 const cacheName = 'livescan-v1';
-const assets = ['/', '/index.html', '/style.css', '/script.js', '/manifest.json', '/logo.png'];
+const assets = ['./', './index.html', './style.css', './script.js', './manifest.json', './logo.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(cacheName).then(c => c.addAll(assets)).then(() => self.skipWaiting()));
