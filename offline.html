@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#080b10" />
+  <title>LiveScan — Offline</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080b10;
+      --surface: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.09);
+      --text: #e8edf5;
+      --textMuted: rgba(232,237,245,0.42);
+      --accent: #00e5ff;
+      --accentDim: rgba(0,229,255,0.12);
+      --accentGlow: rgba(0,229,255,0.28);
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      max-width: 340px;
+      width: calc(100% - 48px);
+      text-align: center;
+      padding: 48px 32px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      animation: cardIn 0.6s cubic-bezier(0.34,1.4,0.64,1) both;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(28px) scale(0.94); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      background: var(--accentDim);
+      border: 1px solid rgba(0,229,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+    }
+
+    .icon svg {
+      width: 34px;
+      height: 34px;
+      color: var(--accent);
+    }
+
+    h1 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--textMuted);
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: var(--accent);
+      color: #080b10;
+      border: none;
+      border-radius: 12px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 24px var(--accentGlow);
+      transition: opacity 0.2s ease, transform 0.15s ease;
+    }
+
+    button svg { width: 16px; height: 16px; }
+    button:hover { opacity: 0.88; transform: translateY(-1px); }
+    button:active { transform: translateY(0); }
+
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 28px;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.3;
+      animation: blink 1.4s ease-in-out infinite;
+    }
+
+    .dot:nth-child(2) { animation-delay: 0.2s; }
+    .dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes blink {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+
+    <div class="icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="1" y1="1" x2="23" y2="23"/>
+        <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/>
+        <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/>
+        <path d="M10.71 5.05A16 16 0 0 1 22.56 9"/>
+        <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/>
+        <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+        <line x1="12" y1="20" x2="12.01" y2="20"/>
+      </svg>
+    </div>
+
+    <h1>You're Offline</h1>
+
+    <div class="dots">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+
+    <p>LiveScan requires an internet connection to load the OCR engine. Please check your connection and try again.</p>
+
+    <button onclick="location.reload()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="23 4 23 10 17 10"/>
+        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+      </svg>
+      Try Again
+    </button>
+
+  </div>
+</body>
+</html>
