@@ -2,7 +2,7 @@
   "name": "LiveScan OCR",
   "short_name": "LiveScan",
   "description": "Real-time camera OCR scanner",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#080b10",
   "theme_color": "#080b10",
