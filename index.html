@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>LiveScan — Real-time OCR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="app">
+
+    <header id="topBar">
+      <div id="brand">
+        <span id="brandIcon">◈</span>
+        <span id="brandName">LiveScan</span>
+      </div>
+      <div id="controls">
+        <button id="toggleOverlay" class="iconBtn" title="Toggle word boxes">⬡</button>
+        <button id="toggleScan" class="iconBtn active" title="Start/stop scanning">◉</button>
+        <button id="toggleSidebar" class="iconBtn" title="Open notes">≡</button>
+      </div>
+    </header>
+
+    <main id="viewport">
+      <video id="feed" autoplay playsinline muted></video>
+      <canvas id="overlay"></canvas>
+
+      <div id="statusBar">
+        <div id="statusDot"></div>
+        <span id="statusText">Initializing…</span>
+        <span id="fpsDisplay" class="mono"></span>
+      </div>
+
+      <div id="permissionScreen">
+        <div id="permissionCard">
+          <div id="permIcon">◈</div>
+          <h2>Camera Access Required</h2>
+          <p>LiveScan needs your camera to detect and extract text in real time.</p>
+          <button id="grantBtn">Allow Camera</button>
+          <p id="permError" class="hidden"></p>
+        </div>
+      </div>
+
+      <div id="loadingScreen">
+        <div id="loaderWrap">
+          <div id="loaderRing"></div>
+          <span id="loaderLabel" class="mono">Loading OCR engine…</span>
+        </div>
+      </div>
+    </main>
+
+    <aside id="sidebar">
+      <div id="sidebarHeader">
+        <span id="sidebarTitle">Notes</span>
+        <div id="sidebarActions">
+          <button id="copyAll" class="textBtn" title="Copy all notes">Copy All</button>
+          <button id="clearAll" class="textBtn danger" title="Delete all">Clear</button>
+          <button id="closeSidebar" class="iconBtn">✕</button>
+        </div>
+      </div>
+      <div id="noteList"></div>
+      <div id="noteHint" class="mono">Tap a detected word to save it here.<br/>Shift+tap to append to the last note.</div>
+    </aside>
+
+    <div id="sidebarBackdrop"></div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
